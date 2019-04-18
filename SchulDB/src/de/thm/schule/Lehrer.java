@@ -1,11 +1,69 @@
 package de.thm.schule;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.sql.Date;
+
+@Entity
 public class Lehrer{
+
+    @Id
+    private int pnr;
+
+    public Lehrer (){
+
+    }
 
 	private String nachname;
 	private String vorname;
-	
-	public String getNachname() {
+
+    public void setPnr(int pnr) {
+        this.pnr = pnr;
+    }
+
+    public void setTitel(String titel) {
+        this.titel = titel;
+    }
+
+    public void setStufe(String stufe) {
+        this.stufe = stufe;
+    }
+
+    public void setGebdatum(Date gebdatum) {
+        this.gebdatum = gebdatum;
+    }
+
+    public void setSchuleintritt(Date schuleintritt) {
+        this.schuleintritt = schuleintritt;
+    }
+
+
+    private String titel;
+	private String stufe;
+	private Date gebdatum;
+	private Date schuleintritt;
+
+    public int getPnr() {
+        return pnr;
+    }
+
+    public String getTitel() {
+        return titel;
+    }
+
+    public String getStufe() {
+        return stufe;
+    }
+
+    public Date getGebdatum() {
+        return gebdatum;
+    }
+
+    public Date getSchuleintritt() {
+        return schuleintritt;
+    }
+
+    public String getNachname() {
 		return nachname;
 	}
 
