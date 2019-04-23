@@ -1,83 +1,50 @@
 package de.thm.schule;
 
-import javax.persistence.*;
-import java.sql.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Lehrer{
+public class Lehrer {
 
-    @OneToOne
-    private Klasse klasse;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pnr;
-
-
-
-    public Lehrer(){
-
-    }
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@OneToOne(mappedBy = "lehrer", cascade = CascadeType.PERSIST)
+	private Klasse klasse;
 	private String nachname;
 	private String vorname;
 
-    public void setPnr(int pnr) {
-        this.pnr = pnr;
-    }
-
-    public void setTitel(String titel) {
-        this.titel = titel;
-    }
-
-    public void setStufe(String stufe) {
-        this.stufe = stufe;
-    }
-
-    public void setGebdatum(Date gebdatum) {
-        this.gebdatum = gebdatum;
-    }
-
-    public void setSchuleintritt(Date schuleintritt) {
-        this.schuleintritt = schuleintritt;
-    }
-
-
-    private String titel;
-	private String stufe;
-	private Date gebdatum;
-	private Date schuleintritt;
-
-    public int getPnr() {
-        return pnr;
-    }
-
-    public String getTitel() {
-        return titel;
-    }
-
-    public String getStufe() {
-        return stufe;
-    }
-
-    public Date getGebdatum() {
-        return gebdatum;
-    }
-
-    public Date getSchuleintritt() {
-        return schuleintritt;
-    }
-
-    public String getNachname() {
-		return nachname;
+	public int getId() {
+		return id;
 	}
 
-	public void setNachname(String nachname) {
-		this.nachname = nachname;
+	public Klasse getKlasse() {
+		return klasse;
+	}
+
+	public String getNachname() {
+		return nachname;
 	}
 
 	public String getVorname() {
 		return vorname;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setKlasse(Klasse klasse) {
+		klasse.setLehrer(this);
+		this.klasse = klasse;
+	}
+
+	public void setNachname(String nachname) {
+		this.nachname = nachname;
 	}
 
 	public void setVorname(String vorname) {
