@@ -1,16 +1,21 @@
 package de.thm.schule;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 public class Lehrer{
 
+    @OneToOne
+    private Klasse klasse;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pnr;
 
-    public Lehrer (){
+
+
+    public Lehrer(){
 
     }
 

@@ -1,12 +1,24 @@
 import de.thm.schule.Lehrer;
+import de.thm.schule.Schueler;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 
 public class SchulVerwaltung {
-    public static void main(String[] args){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("THM");
+
+    private static EntityManagerFactory entityManagerFactory;
+
+    //Aufgabe 3
+    private static EntityManager getEntitityManger(){
+        entityManagerFactory = Persistence.createEntityManagerFactory("THM");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
+        return entityManager;
+    }
+
+    public static void main(String[] args){
+
+
+        EntityManager entityManager = getEntitityManger();
         EntityTransaction entityTransaction = entityManager.getTransaction();
 
         entityTransaction.begin();
@@ -16,6 +28,7 @@ public class SchulVerwaltung {
         int c = 1;
         boolean done = false;
         while( !done) {
+            //Aufgabe 5
             l = entityManager.find(Lehrer.class, c);
             if (l != null) {
                 lehrerArrayList.add(l);
@@ -36,14 +49,19 @@ public class SchulVerwaltung {
             System.out.print(lehrerArrayList.get(i).getStufe()+" \n");
         }
 
+        //Schueler schueler = entityManager.find(Schueler.class, 1);
+
         l = entityManager.find(Lehrer.class, 1);
         entityManager.persist(l);
         l.setNachname("Schmittengrund");
         entityTransaction.commit();
-
+        entityManager.remove(l);
+        entityManager.persist(l);
         entityManager.close();
         entityManagerFactory.close();
     }
+
+
 
     public void createLehrer(){
     }
