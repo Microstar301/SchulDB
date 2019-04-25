@@ -1,53 +1,48 @@
 package de.thm.schule;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
-public class Lehrer {
+@DiscriminatorValue(value = "L")
+public class Lehrer extends Person {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
 	@OneToOne(mappedBy = "lehrer", cascade = CascadeType.PERSIST)
 	private Klasse klasse;
-	private String nachname;
-	private String vorname;
 
-	public int getId() {
-		return id;
-	}
 
 	public Klasse getKlasse() {
 		return klasse;
 	}
 
-	public String getNachname() {
-		return nachname;
-	}
-
-	public String getVorname() {
-		return vorname;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public void setKlasse(Klasse klasse) {
 		klasse.setLehrer(this);
 		this.klasse = klasse;
 	}
-
+/*
 	public void setNachname(String nachname) {
-		this.nachname = nachname;
+		super.setNachname(nachname);
 	}
 
 	public void setVorname(String vorname) {
-		this.vorname = vorname;
+		super.setVorname(vorname);
 	}
+
+	public String getNachname() {
+		return super.getNachname();
+	}
+
+	public String getVorname() {
+		return super.getVorname();
+	}
+
+	public Date getGebdatum() {
+		return super.getGebdatum();
+	}
+
+	public void setGebdatum(Date gebdatum) {
+		super.setGebdatum(gebdatum);
+	}
+*/
 }

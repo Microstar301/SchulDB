@@ -1,52 +1,49 @@
 package de.thm.schule;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
-public class Schueler {
+@DiscriminatorValue(value = "S")
+public class Schueler extends Person {
 
 	@ManyToMany(mappedBy = "schueler", cascade = CascadeType.PERSIST)
 	private List<AG> ags = new ArrayList<AG>();
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Klasse klasse;
 
-	private String nachname;
-	private String vorname;
+
 
 	public List<AG> getAgs() {
 		return ags;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public Klasse getKlasse() {
 		return klasse;
 	}
 
+	public void setKlasse(Klasse klasse){ this.klasse = klasse; }
+	/*
 	public String getNachname() {
-		return nachname;
+		return super.getNachname();
 	}
 
 	public String getVorname() {
-		return vorname;
+		return super.getVorname();
 	}
 
+    public Date getGebdatum() {
+        return super.getGebdatum();
+    }
+
+    public void setGebdatum(Date gebdatum) {
+        super.setGebdatum(gebdatum);
+    }
+*/
 	public void setAgs(List<AG> ags) {
 		for (AG ag : ags)
 			this.addAg(ag);
@@ -59,25 +56,12 @@ public class Schueler {
 		}
 	}
 
+	/*
 	@Override
 	public String toString() {
-		return "Schueler [ags=" + ags + ", id=" + id + ", klasse=" + klasse + ", nachname=" + nachname + ", vorname=" + vorname + "]";
+		return "Schueler [ags=" + ags + ", id=" + id + ", klasse=" + klasse + ", nachname=" + super.getNachname() + ", vorname=" + super.getVorname() + "]";
 	}
+	 */
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setKlasse(Klasse klasse) {
-		this.klasse = klasse;
-	}
-
-	public void setNachname(String nachname) {
-		this.nachname = nachname;
-	}
-
-	public void setVorname(String vorname) {
-		this.vorname = vorname;
-	}
 
 }
