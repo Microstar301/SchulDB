@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@NamedQuery(name = "LEHRER_BY_NACHNAME", query = "select l from Lehrer l where l.nachname = :name")
 @DiscriminatorValue(value = "L")
 public class Lehrer extends Person {
 

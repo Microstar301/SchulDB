@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@NamedQuery(name = "SCHUELER_BY_KLASSE", query = "select s from Schueler s where s.klasse.bezeichnung = :klassenbezeichnung")
 @DiscriminatorValue(value = "S")
 public class Schueler extends Person {
 
@@ -56,12 +57,10 @@ public class Schueler extends Person {
 		}
 	}
 
-	/*
 	@Override
 	public String toString() {
-		return "Schueler [ags=" + ags + ", id=" + id + ", klasse=" + klasse + ", nachname=" + super.getNachname() + ", vorname=" + super.getVorname() + "]";
+		return "Schueler [ags=" + ags.toString() + ", id=" + super.getId() + ", klasse=" + klasse.getBezeichnung() + ", nachname=" + super.getNachname() + ", vorname=" + super.getVorname() + "]";
 	}
-	 */
 
 
 }
